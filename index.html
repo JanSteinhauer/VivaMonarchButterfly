@@ -61,6 +61,7 @@
 
     .hero .art{position:relative}
     .art__frame{aspect-ratio:4/3;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.06);transform:rotate(-1deg)}
+    .art__frame2{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.06);transform:rotate(-1deg)}
     .art__frame video {
       width: 100%;
       height: 100%;
@@ -155,6 +156,23 @@
     @media (prefers-reduced-motion: reduce){
       *{animation:none !important;transition:none !important}
     }
+
+    .pip{
+      position: absolute;
+      right: -45px;   /* nudged 35px further right vs -10px */
+      bottom: -10px;
+      width: min(220px, 38%);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,.06);
+      transform: rotate(1deg);
+      background: #fff;
+    }
+    .pip img{ display:block; width:100%; height:auto }
+    @media (max-width: 900px){
+      .pip{ right: 8px; bottom: 8px; width: 38%; transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -171,6 +189,7 @@
     </button>
     <div class="menu" id="menu" role="navigation">
       <a href="#summary">Summary</a>
+      <a href="#avp">Vision Pro App</a>
       <a href="#biology">Biology</a>
       <a href="#range">Range</a>
       <a href="#migration">Migration</a>
@@ -250,6 +269,39 @@
           <li>Join community science: counts, tagging, migration reports.</li>
         </ul>
       </div>
+    </div>
+  </section>
+
+  <!-- VIVAMONARCH — APP (Apple Vision Pro) -->
+  <section id="avp">
+    <div class="wrap grid grid--2">
+      <div class="card reveal">
+        <h2>Apple Vision Pro VivaMonarch</h2>
+        <p>
+          Step into a 360° monarch sanctuary in Michoacán, talk to an Apple Intelligence powered
+          assistant about biology and conservation, trace the migration across the Americas, and
+          browse our field gallery from Mexico.
+        </p>
+        <div class="cta">
+          <a class="btn btn--primary" href="monarch.html" aria-label="Open VivaMonarch app page">Explore the App</a>
+        </div>
+      </div>
+
+      <!-- Image card with PiP overlay -->
+      <figure class="card lift reveal" style="position:relative">
+        <div class="art__frame2">
+          <img
+                  class="rounded"
+                  src="VivaMonarchMainScreen.png"
+                  alt="VivaMonarch app main screen on Apple Vision Pro"
+                  width="3840" height="2160" loading="lazy" decoding="async" />
+        </div>
+
+        <!-- JanAVP PiP badge on top of the same image -->
+        <div class="pip" aria-label="Jan using Apple Vision Pro">
+          <img src="JanAVP.JPG" alt="Jan using Apple Vision Pro" loading="lazy" decoding="async" />
+        </div>
+      </figure>
     </div>
   </section>
 

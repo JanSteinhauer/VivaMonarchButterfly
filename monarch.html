@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="VivaMonarch — Apple Vision Pro app overview: 360° Michoacán scene, Monarch AI, migration journey, gallery, animal migration, and credits." />
+    <title>VivaMonarch — Apple Vision Pro App</title>
+    <link rel="preload" as="image" href="VivaMonarchMainScreen.png">
+    <link rel="preload" as="image" href="MonarchAI1.png">
+    <style>
+        :root{
+            /* Pastel palette */
+            --bg: #fcfbff;
+            --surface: #ffffff;
+            --ink: #1e1b2e;
+            --muted: #6b6880;
+            --brand: #7aa7ff;
+            --brand-2: #ffd3e0;
+            --brand-3: #d8ffe2;
+            --brand-4: #fff2c2;
+            --brand-5: #e6e0ff;
+            --ring: rgba(122,167,255,.55);
+            --shadow: 0 10px 30px rgba(30,27,46,.08);
+            --radius: 16px;
+            --radius-lg: 22px;
+        }
+
+        *,*::before,*::after{box-sizing:border-box}
+        html,body{margin:0;height:100%;scroll-behavior:smooth;background:var(--bg);color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"}
+        img,video{max-width:100%;height:auto;display:block}
+        a{color:inherit}
+        h1,h2,h3{line-height:1.15;margin:0 0 .6rem}
+        p{margin:.5rem 0 1rem;color:var(--muted)}
+        section{padding:clamp(28px,4vw,64px) 0}
+
+        /* Top nav */
+        .nav{position:sticky;top:0;z-index:1000;background:color-mix(in hsl, var(--surface) 88%, var(--brand-5));backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}
+        .nav__in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:10px 18px}
+        .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
+        .logo img{width:32px;height:32px;border-radius:9px}
+        .nav a{opacity:.85;text-decoration:none;padding:10px 12px;border-radius:10px}
+        .nav a:hover{background:rgba(0,0,0,.04)}
+        .spacer{flex:1}
+        .hamburger{display:none;cursor:pointer;border:0;background:transparent;padding:8px;border-radius:10px}
+        .hamburger:focus-visible{outline:3px solid var(--ring)}
+        .menu{display:flex;gap:4px;flex-wrap:wrap}
+        .menu.open{display:block}
+
+        /* Hero */
+        .hero{position:relative;overflow:hidden;background:linear-gradient(140deg,var(--brand-5),var(--brand-3) 40%,var(--surface));}
+        .hero__in{max-width:1200px;margin:0 auto;padding:clamp(40px,6vw,96px) 18px;display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
+        .tag{display:inline-block;background:color-mix(in hsl,var(--brand-4),#fff 35%);color:#6a5a00;font-weight:600;padding:6px 10px;border-radius:999px;border:1px solid rgba(0,0,0,.06)}
+        .hero h1{font-size:clamp(28px,5vw,52px)}
+        .hero p{font-size:clamp(14px,2.3vw,18px)}
+        .cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:999px;border:1px solid rgba(0,0,0,.08);box-shadow:var(--shadow);background:var(--surface);cursor:pointer;text-decoration:none;font-weight:700}
+        .btn--primary{background:linear-gradient(180deg, color-mix(in hsl,var(--brand),#fff 35%), var(--brand));color:#fff;border:0}
+        .btn:focus-visible{outline:3px solid var(--ring)}
+
+        .art{position:relative}
+        .art__frame{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.06);transform:rotate(-1deg)}
+        .rounded{border-radius:var(--radius-lg);overflow:hidden}
+
+        /* Hero PiP badge (JanAVP overlay) */
+        .pip{
+            position: absolute;
+            right: -45px;   /* was -10px → moved 35px further right */
+            bottom: -10px;
+            width: min(220px, 38%);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,.06);
+            transform: rotate(1deg);
+            background: #fff;
+        }
+        .pip img{display:block;width:100%;height:auto}
+        @media (max-width: 900px){
+            .pip{ right: 8px; bottom: 8px; width: 38%; transform: none; }
+        }
+
+        /* Shells */
+        .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+        .card{background:var(--surface);border-radius:var(--radius);border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow);padding:22px}
+        .grid{display:grid;gap:18px}
+        .grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+        .grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+        /* Micro-interactions */
+        .lift{transition:transform .25s ease, box-shadow .25s ease}
+        .lift:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(30,27,46,.12)}
+        .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        /* Feature */
+        .feature{display:flex;gap:14px;align-items:flex-start}
+        .feature img{width:68px;height:68px;border-radius:14px;border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow);object-fit:cover}
+
+        /* Gallery */
+        .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+        .gallery figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,.06)}
+        .gallery .span-3{grid-column:span 3}
+        .gallery .span-2{grid-column:span 2}
+        .gallery .span-1{grid-column:span 1}
+
+        /* Accent */
+        .accent{background:linear-gradient(135deg,var(--brand-5),#fff);border:1px dashed color-mix(in hsl,var(--brand-5),#777 40%)}
+
+        footer{padding:28px 18px;color:var(--muted);text-align:center}
+
+        /* Back button */
+        .backbar{position:sticky;bottom:0;z-index:999;background:transparent;display:flex;justify-content:center;padding:0 18px 18px}
+        .to-home{position:relative}
+
+        /* Mobile */
+        @media (max-width: 900px){
+            .hero__in{grid-template-columns:1fr}
+            .menu{display:none;flex-direction:column;background:var(--surface);position:absolute;left:0;right:0;top:56px;padding:10px;border-bottom:1px solid rgba(0,0,0,.06)}
+            .hamburger{display:inline-flex}
+            .gallery{grid-template-columns:repeat(2,1fr)}
+            .grid--2{grid-template-columns:1fr}
+            .grid--3{grid-template-columns:1fr}
+        }
+
+        @media (prefers-reduced-motion: reduce){
+            *{animation:none !important;transition:none !important}
+        }
+    </style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav__in">
+        <a class="logo" href="#top" aria-label="VivaMonarch App Home">
+            <img src="Logo.png" alt="VivaMonarch logo" />
+            <span>VivaMonarch App</span>
+        </a>
+        <div class="spacer"></div>
+        <button class="hamburger" id="hamburger" aria-label="Open Menu" aria-expanded="false">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <div class="menu" id="menu" role="navigation">
+            <a href="#overview">Overview</a>
+            <a href="#ai">Monarch AI</a>
+            <a href="#migration">Migration</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#animals">Animal Migration</a>
+            <a href="#bonus">Bonus</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header id="top" class="hero">
+    <div class="hero__in">
+        <div>
+            <span class="tag">Apple Vision Pro Experience</span>
+            <h1>VivaMonarch Explore, learn, and feel the migration</h1>
+            <p>
+                An immersive Apple Vision Pro app: stand inside a 360° monarch colony in Michoacán,
+                talk to an Apple Intelligence–powered assistant, trace the migration from Mexico to
+                Canada and back, browse a field gallery from our Mexico trip, and discover other
+                remarkable animal migrations.
+            </p>
+            <div class="cta">
+                <a class="btn btn--primary" href="#overview">See the main experience</a>
+                <a class="btn" href="index.html">← Back to Home</a>
+            </div>
+        </div>
+
+        <div class="art">
+            <div class="art__frame lift">
+                <img src="VivaMonarchMainScreen.png"
+                     alt="VivaMonarch main screen preview on Apple Vision Pro"
+                     width="3840" height="2160" loading="eager" decoding="async"/>
+            </div>
+
+            <div class="pip" style="right:-45px" aria-label="Jan using Apple Vision Pro">
+                <img src="JanAVP.JPG" alt="Jan using Apple Vision Pro" loading="lazy" decoding="async" />
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- OVERVIEW -->
+    <section id="overview">
+        <div class="wrap grid grid--2">
+            <div class="card reveal">
+                <h2>Main Screen 360° in Michoacán</h2>
+                <p>
+                    Step into a monarch sanctuary. The main screen places you in a 360° scene from
+                    the oyamel fir forests of Michoacán, with butterflies swirling around you. Feel
+                    their density, hear the wingbeats, and start your journey.
+                </p>
+                <div class="feature">
+                    <img src="VivaMonarchMainScreen.png" alt="Main screen thumbnail"
+                         width="3840" height="2160" loading="lazy" decoding="async"/>
+                    <div>
+                        <strong>Presence over pixels</strong>
+                        <p>We optimize for comfort, clarity, and presence—so you can simply look and learn.</p>
+                    </div>
+                </div>
+            </div>
+            <figure class="card lift reveal">
+                <img class="rounded" src="MigrationThroughTheAmericas.png" alt="Migration Through the Americas feature"
+                     width="3840" height="2160" loading="lazy" decoding="async"/>
+            </figure>
+        </div>
+    </section>
+
+    <!-- MONARCH AI -->
+    <section id="ai">
+        <div class="wrap grid grid--2">
+            <div class="card reveal">
+                <h2>Monarch AI Ask anything</h2>
+                <p>
+                    Powered by Apple Intelligence, the in-app assistant answers questions about monarch biology,
+                    migration, conservation, and the latest science. Speak naturally and get succinct, trustworthy answers.
+                </p>
+                <ul>
+                    <li>Conversational Q&A about life cycle, threats, and how to help.</li>
+                    <li>Contextual prompts that adapt to the scene you’re viewing.</li>
+                    <li>Privacy-minded by design.</li>
+                </ul>
+            </div>
+            <div class="grid">
+<!--                <figure class="card lift reveal">-->
+<!--                    <img class="rounded" src="MonarchAI1.png" alt="Monarch AI interface sample"-->
+<!--                         width="3840" height="2160" loading="lazy" decoding="async"/>-->
+<!--                </figure>-->
+                <figure class="card lift reveal">
+                    <img class="rounded" src="MonarchAI2.png" alt="Monarch AI interface sample 2"
+                         width="3840" height="2160" loading="lazy" decoding="async"/>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- MIGRATION THROUGH THE AMERICAS -->
+    <section id="migration">
+        <div class="wrap grid grid--2">
+            <div class="card reveal">
+                <h2>Migration Through the Americas</h2>
+                <p>
+                    Trace multi-generation routes from Mexico to the U.S. and Canada and back again.
+                    Understand timing, flyways, nectar corridors, and overwintering needs in an explorable,
+                    spatial storyboard.
+                </p>
+                <ol>
+                    <li><strong>Spring:</strong> Northward leapfrogging from Mexico into Texas and beyond.</li>
+                    <li><strong>Summer:</strong> Expansion across the Midwest and southern Canada.</li>
+                    <li><strong>Fall:</strong> Orientation south, returning to Mexico’s high-elevation forests.</li>
+                </ol>
+            </div>
+            <figure class="card lift reveal">
+                <img class="rounded" src="MigrationThroughTheAmericas.png" alt="Map scene for migration through the Americas"
+                     width="3840" height="2160" loading="lazy" decoding="async"/>
+            </figure>
+        </div>
+    </section>
+
+    <!-- MONARCH GALLERY -->
+    <section id="gallery">
+        <div class="wrap">
+            <div class="card reveal">
+                <h2>Monarch Butterfly Gallery</h2>
+                <p>Selected photos from our Mexico field trip wings, clusters, and close ups.</p>
+                <div class="gallery">
+                    <figure class="span-3 lift">
+                        <img src="MonarchGallery1.png" alt="Monarchs clustered on oyamel branches"
+                             width="3840" height="2160" loading="lazy" decoding="async"/>
+                    </figure>
+                    <figure class="span-3 lift">
+                        <img src="MonarchGallery2.png" alt="Macro view of monarch wing pattern"
+                             width="3840" height="2160" loading="lazy" decoding="async"/>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANIMAL MIGRATION -->
+    <section id="animals">
+        <div class="wrap grid grid--2">
+            <div class="card reveal">
+                <h2>Animal Migration Beyond Monarchs</h2>
+                <p>
+                    Migration is a global story. This space showcases other travelers like sea turtles and birds
+                    to place monarchs in a wider ecological context and spark curiosity about shared challenges.
+                </p>
+                <ul>
+                    <li>Compare distances, timing, and navigation cues across species.</li>
+                    <li>See how climate and habitat shifts ripple through different migrations.</li>
+                </ul>
+            </div>
+            <div class="grid">
+                <figure class="card lift reveal">
+                    <img class="rounded" src="AnimalMigration1.png" alt="Sea turtle migration visualization"
+                         width="3840" height="2160" loading="lazy" decoding="async"/>
+                </figure>
+                <figure class="card lift reveal">
+                    <img class="rounded" src="AnimalMigration3.png" alt="Mammal migration example"
+                         width="3840" height="2160" loading="lazy" decoding="async"/>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- BONUS / THANKS -->
+    <section id="bonus">
+        <div class="wrap grid grid--2">
+            <div class="card reveal">
+                <h2>Bonus Thank You</h2>
+                <p>
+                    With gratitude to <strong>Jan Steinhauer</strong> and <strong>Cynthia Fernanda Mendoza Pimentel</strong>
+                    for their outstanding work and field efforts, and to the <strong>University of Texas at Austin</strong>
+                    for support and inspiration.
+                </p>
+                <p class="accent" style="padding:14px;border-radius:14px">
+                    This project celebrates collaboration across design, science, and storytelling—
+                    bringing the migration closer to everyone.
+                </p>
+            </div>
+            <div class="grid">
+                <figure class="card lift reveal">
+                    <img class="rounded" src="Bonus.png" alt="Bonus screen — acknowledgements"
+                         width="3840" height="2160" loading="lazy" decoding="async"/>
+                </figure>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    Built with ♡ for Monarch Butterflies — VivaMonarch on Apple Vision Pro
+</footer>
+
+<!-- Sticky back-to-home -->
+<div class="backbar">
+    <a class="btn to-home" href="index.html" aria-label="Back to index">← Back to Home</a>
+</div>
+
+<script>
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+    hamburger?.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', String(open));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if(e.isIntersecting){
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
+            }
+        });
+    }, {threshold: .12});
+
+    document.querySelectorAll('.reveal, .lift').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
