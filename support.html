@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Support • VivaMonarch for Apple Vision Pro. Help, FAQ, contact, privacy, and terms with the same pastel style as the main site." />
+    <title>VivaMonarch • Support</title>
+    <link rel="preload" as="image" href="ButterflyRightSideOfTheScreen.png">
+    <link rel="preload" as="image" href="TwoButterfliesOnFlower.jpeg">
+    <style>
+        :root{
+            --bg: #fcfbff;
+            --surface: #ffffff;
+            --ink: #1e1b2e;
+            --muted: #6b6880;
+            --brand: #7aa7ff;
+            --brand-2: #ffd3e0;
+            --brand-3: #d8ffe2;
+            --brand-4: #fff2c2;
+            --brand-5: #e6e0ff;
+            --ring: rgba(122,167,255,.55);
+            --shadow: 0 10px 30px rgba(30,27,46,.08);
+            --radius: 16px;
+            --radius-lg: 22px;
+        }
+
+        *,*::before,*::after{box-sizing:border-box}
+        html,body{margin:0;height:100%;scroll-behavior:smooth;background:var(--bg);color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"}
+        img,video{max-width:100%;height:auto;display:block}
+        a{color:inherit}
+        h1,h2,h3{line-height:1.15;margin:0 0 .6rem}
+        p{margin:.5rem 0 1rem;color:var(--muted)}
+        section{padding:clamp(28px,4vw,64px) 0}
+
+        .nav{position:sticky;top:0;z-index:1000;background:color-mix(in hsl, var(--surface) 88%, var(--brand-5));backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}
+        .nav__in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:10px 18px}
+        .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
+        .logo img{width:32px;height:32px;border-radius:9px}
+        .nav a{opacity:.85;text-decoration:none;padding:10px 12px;border-radius:10px}
+        .nav a:hover{background:rgba(0,0,0,.04)}
+        .spacer{flex:1}
+
+        .hero{position:relative;overflow:hidden;background:linear-gradient(140deg,var(--brand-5),var(--brand-3) 40%,var(--surface));}
+        .hero__in{max-width:1200px;margin:0 auto;padding:clamp(40px,6vw,96px) 18px;display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
+        .tag{display:inline-block;background:color-mix(in hsl,var(--brand-4),#fff 35%);color:#6a5a00;font-weight:600;padding:6px 10px;border-radius:999px;border:1px solid rgba(0,0,0,.06)}
+        .hero h1{font-size:clamp(28px,5vw,52px)}
+        .hero p{font-size:clamp(14px,2.3vw,18px)}
+        .cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:999px;border:1px solid rgba(0,0,0,.08);box-shadow:var(--shadow);background:var(--surface);cursor:pointer;text-decoration:none;font-weight:700}
+        .btn--primary{background:linear-gradient(180deg, color-mix(in hsl,var(--brand),#fff 35%), var(--brand));color:#fff;border:0}
+        .btn:focus-visible{outline:3px solid var(--ring)}
+
+        .art__frame{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.06);transform:rotate(-1deg)}
+        .art__float{position:absolute;inset:auto -10% -10% auto;width:min(380px,52vw);opacity:.85;filter:drop-shadow(0 20px 30px rgba(0,0,0,.1));animation:floaty 9s ease-in-out infinite}
+        @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+        .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+        .card{background:var(--surface);border-radius:var(--radius);border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow);padding:22px}
+        .grid{display:grid;gap:18px}
+        .grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+        .lift{transition:transform .25s ease, box-shadow .25s ease}
+        .lift:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(30,27,46,.12)}
+        .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        .pill-list{display:flex;flex-wrap:wrap;gap:8px}
+        .pill{background:#F6F8FE;color:#3b82f6;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;border:1px solid rgba(0,0,0,.08)}
+
+        footer{padding:28px 18px;color:var(--muted);text-align:center}
+
+        @media (max-width: 900px){
+            .hero__in{grid-template-columns:1fr}
+            .grid--2{grid-template-columns:1fr}
+        }
+        @media (prefers-reduced-motion: reduce){ *{animation:none !important;transition:none !important} }
+    </style>
+</head>
+<body>
+<nav class="nav">
+    <div class="nav__in">
+        <a class="logo" href="#top" aria-label="VivaMonarch Home">
+            <img src="Logo.png" alt="VivaMonarch logo" />
+            <span>VivaMonarch</span>
+        </a>
+        <div class="spacer"></div>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+    </div>
+</nav>
+
+<header id="top" class="hero">
+    <div class="hero__in">
+        <div>
+            <span class="tag">Support • Apple Vision Pro</span>
+            <h1>VivaMonarch Support</h1>
+            <p>
+                Find quick answers, reach support, and review privacy and terms. VivaMonarch for visionOS is free and requires version 2.6 or later.
+            </p>
+            <div class="cta">
+                <a class="btn btn--primary" href="#contact">Email support</a>
+                <a class="btn" href="#faq">Read the FAQ</a>
+            </div>
+            <div class="pill-list" style="margin-top:14px">
+                <span class="pill">Version 1.0.0</span>
+                <span class="pill">Platform visionOS</span>
+                <span class="pill">Requires 26 or later</span>
+                <span class="pill">Price Free</span>
+            </div>
+        </div>
+        <div class="art">
+            <div class="art__frame lift" aria-hidden="true">
+                <img src="VivaMonarchMainScreen.png" alt="Monarch butterflies on a flower" />
+            </div>
+            <img class="art__float" src="ButterflyRightSideOfTheScreen.png" alt="Monarch butterfly" />
+        </div>
+    </div>
+</header>
+
+<main>
+    <section id="faq">
+        <div class="wrap grid grid--2">
+            <div class="card reveal">
+                <h2>Frequently asked questions</h2>
+                <h3>Which devices are supported</h3>
+                <p>Apple Vision Pro with visionOS 2.6 or later.</p>
+                <h3>Is the app free</h3>
+                <p>Yes. VivaMonarch is free to download and use.</p>
+                <h3>Why does the app request camera or motion access</h3>
+                <p>Only to enable spatial features such as rendering and interaction. You can manage permissions in <em>Settings → Apps → VivaMonarch</em>.</p>
+                <h3>Do you store any personal data</h3>
+                <p>No. We do not collect, store, or share personal information. See the <a href="#privacy">Privacy Policy</a> for details.</p>
+                <h3>I found a bug. How can I report it</h3>
+                <p>Please send an email with steps to reproduce and if possible a short screen recording.</p>
+            </div>
+
+            <div class="card reveal lift" id="contact">
+                <h2>Contact</h2>
+                <p>We are happy to help by email.</p>
+                <p><strong>Email</strong> <a href="mailto:jan.armin.steinhauer@gmail.com">jan.armin.steinhauer@gmail.com</a></p>
+                <div class="cta">
+                    <a class="btn btn--primary" href="mailto:jan.armin.steinhauer@gmail.com?subject=VivaMonarch%20Support">Open email app</a>
+                    <a class="btn" href="#privacy">Privacy</a>
+                    <a class="btn" href="#terms">Terms</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="privacy">
+        <div class="wrap">
+            <article class="card reveal">
+                <h2>Privacy Policy</h2>
+                <p><em>Effective date 19 Oct 2025</em></p>
+                <p>VivaMonarch respects your privacy. The app is free and does not collect, store, or sell personal data.</p>
+
+                <h3>Data collection</h3>
+                <p>We do not collect analytics, personal identifiers, or usage data. Any information you send by email is used only to answer your request.</p>
+
+                <h3>Device permissions</h3>
+                <p>Some features may request access to the camera or motion sensors to enable spatial interaction. Use of these permissions is limited to on device functionality. No data is transmitted to us.</p>
+
+                <h3>Children privacy</h3>
+                <p>The app is suitable for a general audience. We do not knowingly collect information from children.</p>
+
+                <h3>Data retention and deletion</h3>
+                <p>Since we do not collect data there is nothing to delete from our systems. If you emailed us you may request deletion of your email thread at any time.</p>
+
+                <h3>Third parties</h3>
+                <p>The app does not include third party analytics or advertising SDKs.</p>
+
+                <h3>Changes</h3>
+                <p>Any updates to this policy will be reflected in the date above and described in this section.</p>
+
+                <h3>Contact</h3>
+                <p>Questions about privacy Please email <a href="mailto:jan.armin.steinhauer@gmail.com">jan.armin.steinhauer@gmail.com</a>.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="terms">
+        <div class="wrap">
+            <article class="card reveal">
+                <h2>Terms of Use</h2>
+                <p><em>Effective date 19 Oct 2025</em></p>
+
+                <h3>Acceptance</h3>
+                <p>By downloading or using VivaMonarch you agree to these terms.</p>
+
+                <h3>License</h3>
+                <p>We grant you a personal non transferable non exclusive license to use the app on Apple Vision Pro devices you own or control in line with Apple App Store terms.</p>
+
+                <h3>Requirements</h3>
+                <p>The app requires visionOS 26 or later. VivaMonarch is provided free of charge.</p>
+
+                <h3>User conduct</h3>
+                <p>You agree not to misuse the app or attempt to access it by any unauthorised means.</p>
+
+                <h3>Content and updates</h3>
+                <p>Features may change over time. We may update or remove features without prior notice.</p>
+
+                <h3>Disclaimer</h3>
+                <p>The app is provided as is without warranties of any kind. Use at your own risk.</p>
+
+                <h3>Liability</h3>
+                <p>To the maximum extent permitted by law we are not liable for indirect or consequential damages arising from use of the app.</p>
+
+                <h3>Changes to these terms</h3>
+                <p>We may update these terms from time to time. Continued use after changes means you accept the new terms.</p>
+
+                <h3>Contact</h3>
+                <p>For any questions about these terms email <a href="mailto:jan.armin.steinhauer@gmail.com">jan.armin.steinhauer@gmail.com</a>.</p>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer>
+    VivaMonarch • Support • Updated 19 Oct 2025 · <a href="#privacy">Privacy</a> · <a href="#terms">Terms</a>
+</footer>
+
+<script>
+    const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
